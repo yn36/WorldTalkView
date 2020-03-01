@@ -1,0 +1,31 @@
+<!--pages/chat/chat.wxml-->
+<view class="chat">
+  <scroll-view class="chat-container" scroll-y scroll-into-view="{{lastMessageId}}" scroll-top="99999999999999">
+    <view wx:for="{{messages}}" wx:for-item="message" wx:key="id" id="{{message.id}}" class="message {{message.type}}">
+      <view wx:if="{{message.type == 'speak'}}" class="user-message {{message.isMe ? 'me' : 'other'}}">
+        <view class="text">
+          <!-- <view class="msgtop">
+            <image class="avatarurl" src="{{message.avatarUrl}}"></image>
+            <view class="nickname">{{message.user}}</view>
+          </view>
+          <view class="content">{{message.content}}</view> -->
+          <view class="msgleft">
+            <image class="avatarurl" src="{{message.avatarUrl}}"></image>
+          </view>
+          <view class="msgrig">
+            <view class="nickname">{{message.user}}</view>
+            <view class="content">
+              <text selectable="true">{{message.content}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{message.type == 'system'}}" class="system-message">
+        {{message.content}}
+      </view>
+    </view>
+  </scroll-view>
+  <view class="input-panel">
+    <input type="text" value="{{inputContent}}" cursor-spacing="20" bindchange="changeInputContent" class="send-input" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
+  </view>
+</view>
